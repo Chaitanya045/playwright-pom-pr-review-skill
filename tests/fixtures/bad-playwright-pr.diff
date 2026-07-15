@@ -1,0 +1,104 @@
+diff --git a/tests/patients.spec.ts b/tests/patients.spec.ts
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/tests/patients.spec.ts
+@@ -0,0 +1,23 @@
++import { test, expect } from '@playwright/test';
++import { PatientsPage } from '../src/pages/PatientsPage';
++
++let patientsPage: any;
++
++test.beforeAll(async ({ page }) => {
++  patientsPage = new PatientsPage(page);
++  await page.goto('/patients');
++});
++
++test('creates patient', async ({ page }) => {
++  const patientsPage = new PatientsPage(page);
++  await page.locator('#root > div:nth-child(2) button.primary').click();
++  await page.waitForTimeout(2000);
++  const patient = JSON.parse('{"name":"John"}') as Patient;
++  await patientsPage.modal.fillForm(patient);
++  await patientsPage.modal.save({ force: true });
++  expect(await page.locator('.toast').isVisible()).toBe(true);
++});
++
++test.skip('updates patient', async ({ page }) => {
++  await page.pause();
++});
+diff --git a/src/pages/PatientsPage.ts b/src/pages/PatientsPage.ts
+new file mode 100644
+index 0000000..2222222
+--- /dev/null
++++ b/src/pages/PatientsPage.ts
+@@ -0,0 +1,13 @@
++import { Page } from '@playwright/test';
++
++export class PatientsPage {
++  constructor(public page: Page) {}
++
++  async search(value: string) {
++    await this.page.getByPlaceholder('Search').fill(value);
++  }
++
++  async sortByColumn(column: string) {
++    await this.page.locator('table thead tr th').filter({ hasText: column }).click();
++  }
++}
+diff --git a/src/pages/TasksPage.ts b/src/pages/TasksPage.ts
+new file mode 100644
+index 0000000..3333333
+--- /dev/null
++++ b/src/pages/TasksPage.ts
+@@ -0,0 +1,13 @@
++import { Page } from '@playwright/test';
++
++export class TasksPage {
++  constructor(public page: Page) {}
++
++  async search(value: string) {
++    await this.page.getByPlaceholder('Search').fill(value);
++  }
++
++  async sortByColumn(column: string) {
++    await this.page.locator('table thead tr th').filter({ hasText: column }).click();
++  }
++}
+diff --git a/playwright.config.ts b/playwright.config.ts
+new file mode 100644
+index 0000000..4444444
+--- /dev/null
++++ b/playwright.config.ts
+@@ -0,0 +1,9 @@
++import { defineConfig } from '@playwright/test';
++
++export default defineConfig({
++  testDir: 'tests',
++  use: {
++    baseURL: 'http://localhost:3000',
++    trace: 'off',
++  },
++});
+diff --git a/package.json b/package.json
+new file mode 100644
+index 0000000..5555555
+--- /dev/null
++++ b/package.json
+@@ -0,0 +1,9 @@
++{
++  "scripts": {
++    "test:e2e": "playwright test"
++  },
++  "devDependencies": {
++    "@playwright/test": "latest",
++    "typescript": "latest"
++  }
++}
+diff --git a/playwright/.auth/user.json b/playwright/.auth/user.json
+new file mode 100644
+index 0000000..6666666
+--- /dev/null
++++ b/playwright/.auth/user.json
+@@ -0,0 +1 @@
++{"cookies":[{"name":"session","value":"secret"}],"origins":[]}

@@ -1,0 +1,8 @@
+docs/research.md
+node_modules/
+coverage/
+.agents/
+skills-lock.json
+evals/runs/
+tests/smoke-review-output.json
+tests/smoke-summary.json

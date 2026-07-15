@@ -1,0 +1,86 @@
+[
+  {
+    "id": "positive-bad-framework-diff",
+    "should_trigger": true,
+    "prompt": "Review this Playwright TypeScript POM framework pull request for code-impacting issues.",
+    "diff_file": "tests/fixtures/bad-playwright-pr.diff",
+    "expected_checks": {
+      "duplicate_route_pom_logic": ["duplicate", "search", "sort"],
+      "shared_page_before_all": ["beforeall", "shared"],
+      "multiple_pom_instances_any": ["any", "new patientspage"],
+      "brittle_dom_locator": ["nth-child"],
+      "hard_wait": ["waitfortimeout"],
+      "unvalidated_json_cast": ["json.parse", "schema"],
+      "force_or_manual_assertion": ["force", "isvisible"],
+      "skipped_debug_code": ["skip", "pause"],
+      "missing_ci_config_guards": ["forbidonly", "trace"],
+      "missing_type_lint_format": ["tsc", "eslint", "format"],
+      "committed_auth_state": ["auth", "committed"]
+    }
+  },
+  {
+    "id": "positive-locator-flake-snippet",
+    "should_trigger": true,
+    "prompt": "Review a Playwright PR where a page object adds `page.locator('#root > div:nth-child(4) button').click()`, `page.waitForTimeout(5000)`, and `expect(await toast.isVisible()).toBe(true)` in a TypeScript test.",
+    "expected_checks": {
+      "brittle_locator": ["nth-child"],
+      "hard_wait": ["waitfortimeout"],
+      "manual_assertion": ["isvisible", "web-first"]
+    }
+  },
+  {
+    "id": "positive-schema-fixture-snippet",
+    "should_trigger": true,
+    "prompt": "Review a Playwright TypeScript fixture PR that loads `const user = JSON.parse(fs.readFileSync('user.json', 'utf8')) as User`, reads `process.env.BASE_URL!`, and defines `base.extend({ userPage: async ({ page }, use) => use(new UserPage(page)) })` with no fixture types.",
+    "expected_checks": {
+      "json_schema_validation": ["json.parse", "schema"],
+      "env_validation": ["process.env", "validation"],
+      "typed_fixtures": ["base.extend", "typed"]
+    }
+  },
+  {
+    "id": "positive-spa-architecture-snippet",
+    "should_trigger": true,
+    "prompt": "Review a Playwright POM PR for a React SPA where PatientsPage, TasksPage, and UsersPage each add copied `search`, `applyFilters`, `sortByColumn`, and `openModal` methods, while specs call `patientsPage.table.openRow(0); patientsPage.modal.save()` to create a patient.",
+    "expected_checks": {
+      "component_objects": ["component", "duplicate"],
+      "business_workflow": ["business", "workflow"],
+      "index_row": ["openrow(0)"]
+    }
+  },
+  {
+    "id": "positive-auth-ci-snippet",
+    "should_trigger": true,
+    "prompt": "Review a Playwright framework PR that adds `playwright/.auth/admin.json` to the repo, changes `trace` to `off`, has no `forbidOnly`, and package scripts only run `playwright test` without `tsc`, ESLint, formatter, or browser install in CI.",
+    "expected_checks": {
+      "auth_state_secret": ["auth", "gitignore"],
+      "forbid_only_trace": ["forbidonly", "trace"],
+      "type_lint_format_ci": ["tsc", "eslint", "format"]
+    }
+  },
+  {
+    "id": "negative-react-component-only",
+    "should_trigger": false,
+    "prompt": "Review a React product PR that changes a dashboard card component CSS module and adds a unit test with Vitest. There are no Playwright tests, locators, POMs, fixtures, or CI changes."
+  },
+  {
+    "id": "negative-docs-only",
+    "should_trigger": false,
+    "prompt": "Review a docs-only PR that edits README wording about onboarding. No test framework files changed."
+  },
+  {
+    "id": "negative-selenium-java",
+    "should_trigger": false,
+    "prompt": "Review a Java Selenium PageFactory test framework PR. It does not use Playwright or TypeScript."
+  },
+  {
+    "id": "negative-generic-formatting",
+    "should_trigger": false,
+    "prompt": "Review only whether TypeScript files follow semicolon and quote formatting. The formatter already runs in CI and this is not about Playwright behavior."
+  },
+  {
+    "id": "negative-api-client-only",
+    "should_trigger": false,
+    "prompt": "Review a backend API client PR that changes a Node fetch wrapper and Jest tests. No Playwright e2e framework files changed."
+  }
+]
