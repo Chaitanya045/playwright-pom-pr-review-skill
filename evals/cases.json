@@ -5,17 +5,50 @@
     "prompt": "Review this Playwright TypeScript POM framework pull request for code-impacting issues.",
     "diff_file": "tests/fixtures/bad-playwright-pr.diff",
     "expected_checks": {
-      "duplicate_route_pom_logic": ["duplicate", "search", "sort"],
-      "shared_page_before_all": ["beforeall", "shared"],
-      "multiple_pom_instances_any": ["any", "new patientspage"],
-      "brittle_dom_locator": ["nth-child"],
-      "hard_wait": ["waitfortimeout"],
-      "unvalidated_json_cast": ["json.parse", "schema"],
-      "force_or_manual_assertion": ["force", "isvisible"],
-      "skipped_debug_code": ["skip", "pause"],
-      "missing_ci_config_guards": ["forbidonly", "trace"],
-      "missing_type_lint_format": ["tsc", "eslint", "format"],
-      "committed_auth_state": ["auth", "committed"]
+      "duplicate_route_pom_logic": [
+        "duplicate",
+        "search",
+        "sort"
+      ],
+      "shared_page_before_all": [
+        "beforeall",
+        "shared"
+      ],
+      "multiple_pom_instances_any": [
+        "any",
+        "new patientspage"
+      ],
+      "brittle_dom_locator": [
+        "nth-child"
+      ],
+      "hard_wait": [
+        "waitfortimeout"
+      ],
+      "unvalidated_json_cast": [
+        "json.parse",
+        "schema"
+      ],
+      "force_or_manual_assertion": [
+        "force",
+        "isvisible"
+      ],
+      "skipped_debug_code": [
+        "skip",
+        "pause"
+      ],
+      "missing_ci_config_guards": [
+        "forbidonly",
+        "trace"
+      ],
+      "missing_type_lint_format": [
+        "tsc",
+        "eslint",
+        "format"
+      ],
+      "committed_auth_state": [
+        "auth",
+        "committed"
+      ]
     }
   },
   {
@@ -23,9 +56,16 @@
     "should_trigger": true,
     "prompt": "Review a Playwright PR where a page object adds `page.locator('#root > div:nth-child(4) button').click()`, `page.waitForTimeout(5000)`, and `expect(await toast.isVisible()).toBe(true)` in a TypeScript test.",
     "expected_checks": {
-      "brittle_locator": ["nth-child"],
-      "hard_wait": ["waitfortimeout"],
-      "manual_assertion": ["isvisible", "web-first"]
+      "brittle_locator": [
+        "nth-child"
+      ],
+      "hard_wait": [
+        "waitfortimeout"
+      ],
+      "manual_assertion": [
+        "isvisible",
+        "web-first"
+      ]
     }
   },
   {
@@ -33,9 +73,18 @@
     "should_trigger": true,
     "prompt": "Review a Playwright TypeScript fixture PR that loads `const user = JSON.parse(fs.readFileSync('user.json', 'utf8')) as User`, reads `process.env.BASE_URL!`, and defines `base.extend({ userPage: async ({ page }, use) => use(new UserPage(page)) })` with no fixture types.",
     "expected_checks": {
-      "json_schema_validation": ["json.parse", "schema"],
-      "env_validation": ["process.env", "validation"],
-      "typed_fixtures": ["base.extend", "typed"]
+      "json_schema_validation": [
+        "json.parse",
+        "schema"
+      ],
+      "env_validation": [
+        "process.env",
+        "validation"
+      ],
+      "typed_fixtures": [
+        "base.extend",
+        "typed"
+      ]
     }
   },
   {
@@ -43,9 +92,17 @@
     "should_trigger": true,
     "prompt": "Review a Playwright POM PR for a React SPA where PatientsPage, TasksPage, and UsersPage each add copied `search`, `applyFilters`, `sortByColumn`, and `openModal` methods, while specs call `patientsPage.table.openRow(0); patientsPage.modal.save()` to create a patient.",
     "expected_checks": {
-      "component_objects": ["component", "duplicate"],
-      "business_workflow": ["business", "workflow"],
-      "index_row": ["openrow(0)"]
+      "component_objects": [
+        "component",
+        "copied"
+      ],
+      "business_workflow": [
+        "business",
+        "workflow"
+      ],
+      "index_row": [
+        "openrow(0)"
+      ]
     }
   },
   {
@@ -53,9 +110,19 @@
     "should_trigger": true,
     "prompt": "Review a Playwright framework PR that adds `playwright/.auth/admin.json` to the repo, changes `trace` to `off`, has no `forbidOnly`, and package scripts only run `playwright test` without `tsc`, ESLint, formatter, or browser install in CI.",
     "expected_checks": {
-      "auth_state_secret": ["auth", "gitignore"],
-      "forbid_only_trace": ["forbidonly", "trace"],
-      "type_lint_format_ci": ["tsc", "eslint", "format"]
+      "auth_state_secret": [
+        "auth",
+        "gitignore"
+      ],
+      "forbid_only_trace": [
+        "forbidonly",
+        "trace"
+      ],
+      "type_lint_format_ci": [
+        "tsc",
+        "eslint",
+        "format"
+      ]
     }
   },
   {

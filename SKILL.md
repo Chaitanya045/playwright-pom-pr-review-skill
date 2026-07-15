@@ -1,26 +1,31 @@
 ---
 name: pr-review-playwright-pom-typescript
-description: Use when reviewing pull requests that change Playwright TypeScript Page Object Model frameworks, page/component/business objects, fixtures, test data, locators, Playwright config, lint/format setup, or CI for end-to-end tests. Check only code-impacting defects in architecture, locator stability, synchronization, type/runtime validation, isolation/auth, and PR guardrails; do not use for non-Playwright app code or generic style review.
+description: Review Playwright TypeScript POM pull requests. Use when PRs touch Playwright tests, page/component/business objects, fixtures, test data, locators, Playwright config, auth storage, lint/format setup, or CI for E2E tests; audit architecture, locator, synchronization, type/runtime validation, isolation/auth, and guardrail defects.
 ---
 
 # PR Review: Playwright TypeScript POM Frameworks
 
 ## Goal
 
-Review Playwright TypeScript framework PRs for defects that change reliability, maintainability, type safety, security, or CI confidence. Do not produce generic best-practice essays. Every comment must cite changed code, explain the failure mode, and propose a concrete fix.
+Audit Playwright TypeScript framework PRs for reliability, maintainability, type safety, security, or CI defects. Each finding needs code evidence, a failure mode, and a concrete fix.
 
-For the full checklist and examples, read `references/review-playbook.md`.
+When a signal appears, read `references/review-playbook.md` for rules and examples.
 
 ## Use this skill when
 
-- The PR changes Playwright tests, page objects, component objects, business/workflow objects, fixtures, test data, API helpers used by E2E tests, auth storage, Playwright config, lint/format config, or CI.
-- The review asks about POM architecture, SPA test framework scaling, locator quality, type safety, schema validation, flaky synchronization, or PR guardrails.
+- A PR changes Playwright tests, page/component/business objects, fixtures, test data, E2E API helpers, auth storage, Playwright config, lint/format config, or CI.
+- The request asks about POM architecture, SPA framework scaling, locators, type safety, schema validation, flaky synchronization, or PR guardrails.
 
 ## Do not use this skill when
 
-- The PR is unrelated product code with no Playwright framework/test impact.
-- The request is a UI design review, unit-test-only review, Selenium/Cypress review, or generic formatting pass.
-- A formatter/linter already owns the issue and there is no missing enforcement to review.
+- The PR has no Playwright framework/test impact.
+- The review is only UI design, unit tests, Selenium/Cypress, or formatter output already enforced by CI.
+
+## Audit steps
+
+1. **Scope** the changed files. Completion criterion: every changed file is either marked Playwright-relevant or explicitly out of scope.
+2. **Inspect** every Playwright-relevant change against the must-check signals. Completion criterion: each signal is either not present or converted into a finding with evidence.
+3. **Emit** only code-impacting findings. Completion criterion: every comment states severity, failure mode, changed-line evidence, and a concrete fix.
 
 ## Review priorities
 
@@ -44,12 +49,10 @@ For the full checklist and examples, read `references/review-playbook.md`.
 
 ## Output format
 
-For each finding:
-
 ```md
 [Severity] Problem: <failure mode>
 Evidence: <changed line/pattern>
 Fix: <specific code/design change>
 ```
 
-If clean, say no code-impacting findings and list the meaningful areas checked: architecture, locators, sync/assertions, type/runtime validation, fixtures/isolation/auth, and CI guardrails.
+If clean, say no code-impacting findings and list the checked areas: architecture, locators, sync/assertions, type/runtime validation, fixtures/isolation/auth, and CI guardrails.
