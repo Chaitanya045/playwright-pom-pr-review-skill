@@ -4,6 +4,12 @@ A PR review skill for Playwright TypeScript Page Object Model frameworks.
 
 Use it to review pull requests that change Playwright tests, page objects, component objects, business/workflow objects, fixtures, test data, locators, Playwright config, auth storage, lint/format setup, or CI for end-to-end tests.
 
+## Install
+
+```bash
+npx skills add Chaitanya045/playwright-pom-pr-review-skill
+```
+
 ## What it checks
 
 The skill focuses only on code-impacting issues:
