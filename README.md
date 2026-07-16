@@ -72,15 +72,6 @@ Without skill  ███████████████░░░░░░�
 Delta          ████████░░░░░░░░░░░░░░░ +8 checks
 ```
 
-### Coverage chart
-
-```mermaid
-xychart-beta
-    title "Expected Checks Covered"
-    x-axis ["With skill", "Without skill"]
-    y-axis "Checks" 0 --> 23
-    bar [23, 15]
-```
 
 ### Per-case coverage
 
