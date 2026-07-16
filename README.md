@@ -40,9 +40,16 @@ The longer review playbook lives in `references/review-playbook.md` so the agent
 
 ## Evaluation results
 
-Current eval results:
+Tested with the session model `openai-codex/gpt-5.5` through the local eval harness using `completion(model="default")`.
 
-| Metric | Result |
+### Summary
+
+| Metric | With skill | Without skill | Difference |
+| --- | ---: | ---: | ---: |
+| Expected checks covered | 23/23 (100.0%) | 15/23 (65.2%) | +8 checks |
+| Coverage points | 100.0 | 65.2 | +34.8 |
+
+| Routing metric | Result |
 | --- | ---: |
 | Eval cases | 10 |
 | Positive trigger cases | 5 |
@@ -50,9 +57,34 @@ Current eval results:
 | Trigger runs | 20 |
 | Trigger pass rate | 20/20 (100.0%) |
 | Outcome cases | 5 |
-| With-skill expected checks covered | 23/23 (100.0%) |
-| Without-skill expected checks covered | 15/23 (65.2%) |
-| Skill delta | +8 checks |
+
+### Coverage bar
+
+```text
+With skill     ███████████████████████ 23/23 100.0%
+Without skill  ███████████████░░░░░░░░ 15/23  65.2%
+Delta          ████████░░░░░░░░░░░░░░░ +8 checks
+```
+
+### Coverage chart
+
+```mermaid
+xychart-beta
+    title "Expected Checks Covered"
+    x-axis ["With skill", "Without skill"]
+    y-axis "Checks" 0 --> 23
+    bar [23, 15]
+```
+
+### Per-case coverage
+
+| Eval case | Expected checks | With skill | Without skill |
+| --- | ---: | ---: | ---: |
+| bad framework diff | 11 | 11 | 5 |
+| locator flake snippet | 3 | 3 | 2 |
+| schema fixture snippet | 3 | 3 | 3 |
+| SPA architecture snippet | 3 | 3 | 2 |
+| auth and CI snippet | 3 | 3 | 3 |
 
 Full report: [`docs/eval-results.md`](docs/eval-results.md)
 
