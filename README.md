@@ -87,34 +87,6 @@ Validate the skill repository:
 python scripts/validate_skill.py
 ```
 
-## Publishing to skills.sh
-
-To publish this skill on `skills.sh`:
-
-1. Use this public GitHub repository URL.
-2. Ensure `SKILL.md` has valid frontmatter:
-
-   ```yaml
-   ---
-   name: pr-review-playwright-pom-typescript
-   description: Review Playwright TypeScript POM pull requests...
-   ---
-   ```
-
-3. Keep the repository structure intact:
-
-   ```text
-   SKILL.md
-   references/
-   evals/
-   scripts/
-   tests/
-   docs/
-   LICENSE
-   README.md
-   ```
-
-4. Submit the GitHub repository URL through the `skills.sh` submission flow, registry PR, or CLI if they provide one.
 
 ## License
 
